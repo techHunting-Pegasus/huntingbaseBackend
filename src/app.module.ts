@@ -11,10 +11,12 @@ import { UsersModule } from './modules/users/Register/users.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     DbModule,
-    JwtModule.register({
+    JwtModule.registerAsync({
       global: true,
-      secret: process.env.JWT_SECRET, // env se lo
-      signOptions: { expiresIn: '7d' },
+      useFactory: () => ({
+        secret: process.env.JWT_SECRET,
+        signOptions: { expiresIn: '7d' },
+      }),
     }),
     UsersModule,
 
