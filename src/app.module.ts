@@ -6,6 +6,7 @@ import { DbModule } from './db/db.module';
 
 import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from './modules/users/Register/users.module';
+import { HomeModule } from './Home/HomeModule/home.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UsersModule } from './modules/users/Register/users.module';
       }),
     }),
     UsersModule,
+    HomeModule
 
   ],
   controllers: [AppController],

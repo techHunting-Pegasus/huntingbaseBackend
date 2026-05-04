@@ -22,3 +22,24 @@ export const SELECT_USER_BY_EMAIL = `
   WHERE email = $1
   LIMIT 1
 `;
+
+
+export const getprojects = `SELECT id, name, description, project_id FROM project`;
+
+export  function buildInsertQuery(table: string, data: Record<string, any>) {
+  const keys = Object.keys(data);
+  const values = Object.values(data);
+
+  const columns = keys.join(', ');
+  const placeholders = keys.map((_, i) => `$${i + 1}`).join(', ');
+
+  const query = `
+    INSERT INTO ${table} (${columns})
+    VALUES (${placeholders})
+    RETURNING *;
+  `;
+
+  return { query, values };
+}
+
+export const checkBundleIdExists = 'SELECT id FROM project WHERE bundle_id = $1';
